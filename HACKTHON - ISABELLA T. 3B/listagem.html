@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Evantech - Participantes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">EVANTECH</div>
+        <div class="menu-links">
+            <a href="index.html">Dashboard</a>
+            <a href="cadastro.html">Novo Cadastro</a>
+            <a href="listagem.html" class="active">Participantes</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Participantes Confirmados</h1>
+        <p>Abaixo estão os dados reais vindos do banco de dados.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-dados"></tbody>
+        </table>
+    </div>
+
+    <script>
+        async function carregarLista() {
+            const tbody = document.getElementById('tabela-dados');
+            tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#888;">Conectando ao banco de dados...</td></tr>';
+
+            // Puxa a lista direto do seu link do Firebase
+            const res = await fetch('https://avantech-be677-default-rtdb.firebaseio.com/participantes.json');
+            const dados = await res.json();
+            tbody.innerHTML = '';
+
+            if(!dados) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align:center; color:#888;">Nenhum participante no banco de dados.</td></tr>`;
+                return;
+            }
+
+            let contador = 1;
+            for (let idFirebase in dados) {
+                let p = dados[idFirebase];
+                tbody.innerHTML += `
+                    <tr>
+                        <td>#${contador++}</td>
+                        <td><strong>${p.nome}</strong></td>
+                        <td>${p.cpf}</td>
+                        <td class="actions">
+                            <a href="edicao.html?id=${idFirebase}" class="btn-edit">Editar</a>
+                            <button onclick="deletar('${idFirebase}')" class="btn-delete">Excluir</button>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+
+        // Função que apaga o registro lá na nuvem do Google
+        async function deletar(idFirebase) {
+            if(confirm("Deseja mesmo deletar este registro do banco de dados?")) {
+                await fetch(`https://avantech-be677-default-rtdb.firebaseio.com/participantes/${idFirebase}.json`, {
+                    method: 'DELETE'
+                });
+                carregarLista(); // Atualiza a tabela na hora
+            }
+        }
+
+        carregarLista();
+    </script>
+</body>
+</html>

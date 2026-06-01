@@ -1,0 +1,251 @@
+/* ==========================================
+   1. RESET E CORES GERAIS
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background-color: #121212; /* Fundo escuro premium */
+    color: #e0e0e0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ==========================================
+   2. MENU DE NAVEGAÇÃO SUPERIOR
+   ========================================== */
+nav {
+    width: 100%;
+    max-width: 800px;
+    background-color: #1e1e1e;
+    padding: 18px 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #2d2d2d;
+}
+
+nav .logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: #deff9a; /* Verde-limão neon */
+    letter-spacing: 1.5px;
+}
+
+nav .menu-links a {
+    color: #a0a0a0;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+nav .menu-links a:hover, nav .menu-links a.active {
+    color: #deff9a; /* Acende em verde */
+}
+
+/* ==========================================
+   3. CONTAINER PRINCIPAL (CAIXA CENTRAL)
+   ========================================== */
+.container {
+    width: 100%;
+    max-width: 800px;
+    background-color: #1e1e1e;
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid #2d2d2d;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 12px;
+    color: #ffffff;
+    border-left: 5px solid #deff9a;
+    padding-left: 15px;
+    font-weight: 700;
+}
+
+p {
+    color: #888888;
+    font-size: 16px;
+    margin-bottom: 30px;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   4. DASHBOARD (CARTÕES DE INFORMAÇÃO)
+   ========================================== */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #252525;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #333333;
+    border-top: 4px solid #deff9a;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 14px;
+    color: #888888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card .number {
+    font-size: 48px;
+    font-weight: 800;
+    color: #deff9a;
+    margin-top: 15px;
+}
+
+/* ==========================================
+   5. FORMULÁRIOS E INPUTS
+   ========================================== */
+.form-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #b0b0b0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    background-color: #252525;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #deff9a;
+    background-color: #2a2a2a;
+    box-shadow: 0 0 10px rgba(222, 255, 154, 0.1);
+}
+
+/* ==========================================
+   6. BOTÕES
+   ========================================== */
+.btn {
+    display: inline-block;
+    width: 100%; /* Ocupa a largura total no formulário */
+    background-color: #deff9a;
+    color: #121212;
+    padding: 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #c5eb7f;
+    box-shadow: 0 5px 15px rgba(222, 255, 154, 0.3);
+}
+/* ==========================================
+   7. TABELAS (REQUISITO: LISTAGEM DE DADOS)
+   ========================================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    background-color: #252525;
+    color: #deff9a;
+    text-align: left;
+    padding: 15px;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #333333;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #2d2d2d;
+    color: #e0e0e0;
+    font-size: 15px;
+}
+
+tr:hover td {
+    background-color: #222222; /* Efeito visual ao passar o mouse na linha */
+}
+
+/* Ajuste para os botões dentro da tabela */
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+.actions .btn-edit {
+    background-color: transparent;
+    border: 1px solid #deff9a;
+    color: #deff9a;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.actions .btn-edit:hover {
+    background-color: #deff9a;
+    color: #121212;
+}
+
+.actions .btn-delete {
+    background-color: transparent;
+    border: 1px solid #ff6b6b;
+    color: #ff6b6b;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.actions .btn-delete:hover {
+    background-color: #ff6b6b;
+    color: #ffffff;
+}

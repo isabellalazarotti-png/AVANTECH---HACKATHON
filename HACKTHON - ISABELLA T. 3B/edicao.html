@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Evantech - Editar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">EVANTECH</div>
+        <div class="menu-links">
+            <a href="index.html">Dashboard</a>
+            <a href="cadastro.html">Novo Cadastro</a>
+            <a href="listagem.html">Participantes</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Atualizar Participante</h1>
+        <p>Altere as informações diretamente no banco de dados.</p>
+        <form id="form-edicao">
+            <div class="form-group">
+                <label>Nome Completo:</label>
+                <input type="text" id="nome" required>
+            </div>
+            <div class="form-group">
+                <label>CPF:</label>
+                <input type="text" id="cpf" required>
+            </div>
+            <button type="submit" class="btn">Salvar Alterações</button>
+        </form>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const idFirebase = urlParams.get('id');
+
+        // Puxa o cadastro específico direto do seu Firebase para preencher os campos
+        async function carregarDados() {
+            if(!idFirebase) return;
+            const res = await fetch(`https://avantech-be677-default-rtdb.firebaseio.com/participantes/${idFirebase}.json`);
+            const p = await res.json();
+            if(p) {
+                document.getElementById('nome').value = p.nome;
+                document.getElementById('cpf').value = p.cpf;
+            }
+        }
+
+        // Salva as alterações feitas no registro lá na nuvem
+        document.getElementById('form-edicao').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const cpf = document.getElementById('cpf').value;
+
+            await fetch(`https://avantech-be677-default-rtdb.firebaseio.com/participantes/${idFirebase}.json`, {
+                method: 'PUT',
+                body: JSON.stringify({ nome, cpf })
+            });
+
+            alert("Banco de dados atualizado com sucesso!");
+            window.location.href = 'listagem.html'; // Volta para a tabela
+        });
+
+        carregarDados();
+    </script>
+</body>
+</html>
